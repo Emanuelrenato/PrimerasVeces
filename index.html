@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Vamos al cine?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffc0cb, #ffe4e1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 40px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 350px;
+      animation: fadeInUp 1.2s ease forwards;
+      opacity: 0;
+      transform: translateY(50px);
+      position: relative;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #d6336c;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      position: absolute;
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #ff85c1;
+    }
+
+    .emoji {
+      font-size: 40px;
+      margin-bottom: 10px;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* 🟣 Estilos para pantallas pequeñas */
+    @media (max-width: 480px) {
+      .card {
+        padding: 20px;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .btn {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      .emoji {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="emoji">🎬❤️</div>
+    <h1>Hola Jimenita 😊</h1>
+    <p>Quería saber si te gustaría ver una película conmigo este finde, hoy sabado.</p>
+    <button class="btn" id="magicBtn">¡Siii!</button>
+  </div>
+
+  <script>
+    const btn = document.getElementById('magicBtn');
+    let isRunning = true;
+    const startTime = Date.now();
+
+    function randomMove() {
+      if (!isRunning) return;
+
+      const card = document.querySelector('.card');
+      const maxX = card.offsetWidth - btn.offsetWidth;
+      const maxY = card.offsetHeight - btn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      btn.style.left = `${x}px`;
+      btn.style.top = `${y}px`;
+    }
+
+    const moveInterval = setInterval(() => {
+      if (Date.now() - startTime > 5000) {
+        clearInterval(moveInterval);
+        isRunning = false;
+        btn.style.position = 'relative';
+        btn.style.left = '0';
+        btn.style.top = '0';
+      } else {
+        randomMove();
+      }
+    }, 500);
+
+    // Redirigir a WhatsApp
+    btn.addEventListener('click', () => {
+      const url = "https://wa.me/51984059910?text=Hola+%F0%9F%98%84+Quería+preguntarte%3A%0A%C2%BFRom%C3%A1nticas+o+Comedia%3F+%F0%9F%8E%AC%0A%C2%BF+Canchita+o+solo+cafecito%3F+%F0%9F%8D%BF%E2%98%95%0A%C2%BF+A+qu%C3%A9+hora%3F+%C2%BF10%3F%C2%BF9%3F";
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>
